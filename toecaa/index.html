@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ada Pesan Buat Kamu... 🤍</title>
+    <title>Ada Pesan Buat Elsha... 🤍</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
@@ -24,6 +24,11 @@
             position: relative;
         }
 
+        /* Class khusus untuk menyembunyikan elemen */
+        .hidden {
+            display: none !important;
+        }
+
         /* Partikel Melayang */
         .heart {
             position: absolute;
@@ -41,8 +46,8 @@
 
         /* Container Card */
         .container {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
             border-radius: 30px;
             padding: 30px 25px;
             width: 88%;
@@ -50,22 +55,13 @@
             text-align: center;
             box-shadow: 0 20px 40px rgba(255, 182, 193, 0.4);
             border: 2px solid rgba(255, 255, 255, 0.9);
-            transform: scale(0.9);
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: none;
-        }
-
-        .container.active {
-            display: block;
-            transform: scale(1);
-            opacity: 1;
+            z-index: 10;
         }
 
         /* GIFs */
         .gif-box img {
-            width: 130px;
-            height: 130px;
+            width: 120px;
+            height: 120px;
             object-fit: cover;
             border-radius: 50%;
             border: 4px solid #fff;
@@ -82,20 +78,20 @@
 
         /* Pesan Typewriter */
         .message-box {
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.7);
             padding: 15px;
             border-radius: 18px;
             font-size: 0.9rem;
             color: #555;
             line-height: 1.6;
-            min-height: 90px;
+            min-height: 120px;
             margin-bottom: 20px;
             text-align: left;
             border: 1px dashed #ffb6c1;
             white-space: pre-line;
         }
 
-        /* Tombol Start Overlay */
+        /* Tombol Start */
         .start-btn {
             background: #ff8fa3;
             color: white;
@@ -131,7 +127,6 @@
             font-weight: 600;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: 0.2s ease;
         }
 
         .btn-yes {
@@ -151,17 +146,20 @@
 </head>
 <body>
 
-    <audio id="bgm" loop>
-        <source src="debu.mp3">
+    <!-- BGM Audio (Menggunakan debu.mp3) -->
+    <audio id="bgm" loop preload="auto">
+        <source src="debu.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- Tombol Awal (Buka Surat) -->
     <div id="startScreen">
         <button class="start-btn" onclick="startExperience()">Buka Pesan 💌</button>
     </div>
 
-    <div class="container" id="mainCard">
+    <!-- Card Utama (Pesan Maaf) -->
+    <div class="container hidden" id="mainCard">
         <div class="gif-box">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Zva2tsbXJqZDFkcnFkY2Nqd3R4eWVnYmxzcTBpZHF5YXNhZjJpbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3T2OBm8S23vUY/giphy.gif" alt="Cute Sad">
+            <img src="https://media.giphy.com/media/L95W4wv8nnb9K/giphy.gif" alt="Sad Cat">
         </div>
         <h1>Maafin Aku Ya? 🥺</h1>
         <div class="message-box" id="typewriter"></div>
@@ -171,23 +169,22 @@
         </div>
     </div>
 
-    <div class="container" id="successCard">
+    <!-- Card Akhir (Setelah Dimaafkan) -->
+    <div class="container hidden" id="successCard">
         <div class="gif-box">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWtoNnhueWs4YjNvaHZscWFocnF0cGVydmF2eXVrdXRqOHFldXZubCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" alt="Happy Cat">
+            <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Happy Cat">
         </div>
         <h1>Makasih Banyak! ✨</h1>
         <p style="color: #666; font-size: 0.95rem; margin-top: 10px;">
-            Aku janji nggak bakal ngulangin lagi. Makasih udah mau ngertiin aku ya! 🥰
+            Janji deh ga bakal bercanda berlebihan lagi. Makasih udah dimaafin yaaa! 🥰🤍
         </p>
     </div>
 
     <script>
-        // Teks Ucapan (Bisa Diubah Bebas)
-        const textMessage = "allooo elcaa,aku mintaaa maappp,aku tadi cumaa mau bercandoo,
-aku kiro elsha marahnya ga asliii,tadii aku kirim pesan tapi boong ny telatt udah diblokir dluann
-maapinn yaaa,aku bercandaanya kelewatannnn,maapinnn yaaaaa🤍🤍";
+        // TEKS UCAPAN KHUSUS BUAT ELSHA
+        const textMessage = "allooo elcaa,aku mintaaa maappp,aku tadi cumaa mau bercandoo,\n\naku kiro elsha marahnya ga asliii,tadii aku kirim pesan tapi boong ny telatt udah diblokir dluann\n\nmaapinn yaaa,aku bercandaanya kelewatannnn,maapinnn yaaaaa🤍🤍";
 
-        // Fitur Partikel Melayang
+        // Efek Hati Melayang
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
@@ -198,55 +195,52 @@ maapinn yaaa,aku bercandaanya kelewatannnn,maapinnn yaaaaa🤍🤍";
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 5000);
         }
-        setInterval(createHeart, 300);
+        setInterval(createHeart, 350);
 
-        // Buka Pesan & Putar Musik
+        // Fungsi Buka Pesan
         function startExperience() {
-            document.getElementById('startScreen').style.display = 'none';
-            const card = document.getElementById('mainCard');
-            card.classList.add('active');
-            
-            // Play Audio
-            const audio = document.getElementById('bgm');
-            audio.play().catch(e => console.log("Audio autostart blocked"));
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('mainCard').classList.remove('hidden');
 
-            // Start Typewriter
+            const audio = document.getElementById('bgm');
+            if (audio) {
+                audio.play().catch(err => console.log("Audio autostart diproteksi browser"));
+            }
+
             typeWriter();
         }
 
-        // Efek Ketik Text
+        // Efek Ketik Teks
         let i = 0;
         function typeWriter() {
             if (i < textMessage.length) {
-                document.getElementById("typewriter").innerHTML += textMessage.charAt(i) === '\n' ? '<br>' : textMessage.charAt(i);
+                const char = textMessage.charAt(i);
+                document.getElementById("typewriter").innerHTML += char === '\n' ? '<br>' : char;
                 i++;
-                setTimeout(typeWriter, 50);
+                setTimeout(typeWriter, 45);
             }
         }
 
-        // Tombol Nggak Lari/Kabur
+        // Tombol "Nggak" Kabur
         function moveButton() {
             const btn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - 120) - (window.innerWidth / 2 - 60);
-            const y = Math.random() * (window.innerHeight - 120) - (window.innerHeight / 2 - 60);
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 200 - 100;
             btn.style.transform = `translate(${x}px, ${y}px)`;
         }
 
-        // Ketika Dimaafkan
+        // Ketika Tombol "Dimaafin" Diklik
         function forgiven() {
-            document.getElementById('mainCard').classList.remove('active');
-            setTimeout(() => {
-                document.getElementById('mainCard').style.display = 'none';
-                const successCard = document.getElementById('successCard');
-                successCard.classList.add('active');
+            document.getElementById('mainCard').classList.add('hidden');
+            document.getElementById('successCard').classList.remove('hidden');
 
-                // Efek Confetti (Kembang Api Kertas)
+            if (typeof confetti === 'function') {
                 confetti({
                     particleCount: 100,
                     spread: 70,
                     origin: { y: 0.6 }
                 });
-            }, 300);
+            }
         }
     </script>
 </body>
