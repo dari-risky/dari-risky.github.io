@@ -1,1 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maaf Ya... 🥺</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
+        body {
+            background: linear-gradient(135deg, #ffe6eb 0%, #def3f8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animasi Background Partikel */
+        .heart-particle {
+            position: absolute;
+            color: rgba(255, 182, 193, 0.6);
+            animation: float 6s infinite linear;
+            font-size: 20px;
+            user-select: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Kartu Utama */
+        .card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            z-index: 10;
+        }
+
+        .gif-container img {
+            width: 130px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #5a4b5c;
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+        }
+
+        p {
+            color: #6e5d6f;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            white-space: pre-line;
+        }
+
+        /* Pemutar Musik */
+        .audio-container {
+            margin-bottom: 20px;
+        }
+
+        .music-btn {
+            background: #ffb6c1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            background: #ffa0b0;
+            transform: scale(1.05);
+        }
+
+        /* Tombol Jawaban */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .btn-yes {
+            background: #b5ead7;
+            color: #2d5a49;
+        }
+
+        .btn-yes:hover {
+            background: #9fe2cb;
+        }
+
+        /* Modal Respon */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            z-index: 100;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="gif-container">
+            <!-- Ganti URL GIF sesuai keinginan jika perlu -->
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWtoNnhueWs4YjNvaHZscWFocnF0cGVydmF2eXVrdXRqOHFldXZubCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L95W4wv8nnb9K/giphy.gif" alt="Sad Cute Anim">
+        </div>
+
+        <h1>Aku Minta Maaf Ya...</h1>
+
+        <!-- EDIT UCAPAN DI SINI -->
+        <p id="pesan">
+            allooo elcaa,aku mintaaa maappp,aku tadi cumaa mau bercandoo,
+aku kiro elsha marahnya ga asliii,tadii aku kirim pesan tapi boong ny telatt udah diblokir dluann
+maapinn yaaa,aku bercandaanya kelewatannnn,maapinnn yaaaaa🤍🤍
+        </p>
+
+        <!-- PEMUTAR MUSIK -->
+        <div class="audio-container">
+            <!-- Ganti link audio di bawah ini dengan link MP3 pilihanmu -->
+            <audio id="bgm" loop>
+                <source src="debu.mp3">
+            </audio>
+            <button class="music-btn" onclick="toggleMusic()" id="musicBtn">🎵 Putar Lagu</button>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn btn-yes" onclick="showResponse()">Udah Dimaafin ❤️</button>
+        </div>
+    </div>
+
+    <div id="responseModal" class="modal">
+        <h3>Makasih Banyak Ya! ✨</h3>
+        <p style="margin-top: 10px; margin-bottom: 0;">Aku janji bakal perbaiki ini ke depannya.</p>
+    </div>
+
+    <script>
+        // Efek Partikel Hati Melayang
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '🌸'; // Bisa diganti 💖 atau ✨
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 6000);
+        }
+        setInterval(createHeart, 400);
+
+        // Kontrol Musik
+        const audio = document.getElementById('bgm');
+        const musicBtn = document.getElementById('musicBtn');
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                musicBtn.innerText = "⏸️ Jeda Lagu";
+            } else {
+                audio.pause();
+                musicBtn.innerText = "🎵 Putar Lagu";
+            }
+        }
+
+        // Respon Klik Maaf
+        function showResponse() {
+            document.getElementById('responseModal').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
